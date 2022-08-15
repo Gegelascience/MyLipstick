@@ -16,6 +16,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Size;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class VideoLiveVersion extends AppCompatActivity {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                 bindPreview(cameraProvider);
             }catch (ExecutionException | InterruptedException e) {
-
+                Log.e("error",e.getMessage());
             }
         }, ContextCompat.getMainExecutor(this));
     }
@@ -74,6 +75,8 @@ public class VideoLiveVersion extends AppCompatActivity {
 
         DisplayMetrics displayMetrics =getResources().getDisplayMetrics();
         Size screenSize = new Size(displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        frameAnalyser.setDrawingInitialSize(displayMetrics.widthPixels,displayMetrics.heightPixels);
 
 
 
